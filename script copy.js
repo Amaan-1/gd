@@ -36,8 +36,9 @@ var uniteBoth;
 var generator;
 
 //CREATE THE SELECT
-let bodygo = document.getElementById("contenter");
-let gimme_cam;
+var bodygo = document.getElementById("contenter");
+var gimme_cam;
+var ids; //Check the ID of the "Selected" option in function logSELECT();
 
 //TABLE Operators
 //SH*T!! - hook in last hours, while killing the design [highly CONTAGIOUS! 👿]
@@ -94,10 +95,11 @@ function record_tap() {
 
 
 //initialize the thing
-let scanner = new Instascan.Scanner({
+var scanner = new Instascan.Scanner({
     video: document.getElementById('preview'),
     mirror: true
 });
+
 
 scanner.addListener('scan', function(content) {
     console.log(content);
@@ -133,7 +135,7 @@ Instascan.Camera.getCameras().then(function(cameras) {
         scanner.start(cameras[0]);
         gimme_cam = cameras;
         console.log(gimme_cam);
-        for (let index = 0; index <= cameras.length; index++) {
+        for (var index = 0; index <= cameras.length; index++) {
             if (index == 0) {
                 bodygo.innerHTML = "<option id='0'>" + cameras[0].name + "</option>";
             } else if (index > 0) {
@@ -152,11 +154,16 @@ Instascan.Camera.getCameras().then(function(cameras) {
 
 //Let the User select their intended camera
 function logSELECT(select) {
-    var ids = select[select.selectedIndex].id; // get id
+    ids = select[select.selectedIndex].id; // get id
     var thugit = gimme_cam[ids];
     scanner.activeCameraId = thugit;
     scanner.start(thugit);
     console.log(ids);
+    if (ids == 0) {
+        scanner.mirror = true;
+    } else if (ids > 0) {
+        scanner.mirror = false;
+    }
 }
 
 //ALL THE FUNCTIONS [on the DECK]
@@ -380,5 +387,8 @@ function terminator() {
 
 
 //////////////////I would have used this to get rid of the wicked scroll [da heck, U CANT TOUCH THIS!; "highly contagious 😈"]/////////////
+//function make_tribute() {  gravity.setAttribute("id", "nobody");}croll [da heck, U CANT TOUCH THIS!; "highly contagious 😈"]/////////////
+//function make_tribute() {  gravity.setAttribute("id", "nobody");}croll [da heck, U CANT TOUCH THIS!; "highly contagious 😈"]/////////////
+//function make_tribute() {  gravity.setAttribute("id", "nobody");}croll [da heck, U CANT TOUCH THIS!; "highly contagious 😈"]/////////////
 //function make_tribute() {  gravity.setAttribute("id", "nobody");}croll [da heck, U CANT TOUCH THIS!; "highly contagious 😈"]/////////////
 //function make_tribute() {  gravity.setAttribute("id", "nobody");}
