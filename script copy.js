@@ -108,11 +108,12 @@ scanner.addListener('scan', function(content) {
         series.push(content);
         console.log(series);
         if (content != variant) {
-            buzzer(11000, content);
+            buzzer(content);
             ispassed = "No";
         } else if (content == variant) {
             ispassed = "Yes";
             passedyes.play();
+            navigator.vibrate([75, 75]);
             alert(content);
         }
         document.getElementById("yesbody").style.overflow = "scroll";
@@ -126,6 +127,7 @@ scanner.addListener('scan', function(content) {
         startplease.play();
         alert("Please, start the scanning series!" + "\n" + "\n" + "However, VARIANT = " + content);
         console.log("hell! 😡 😑 👿");
+        navigator.vibrate(100);
     }
 });
 
@@ -301,10 +303,10 @@ function push_to_body() {
     }
 }
 //SERIES ["BEEP" function, {now buzzer()😓}] go
-function buzzer(ms, need) {
+function buzzer(need) {
 
     passedno.play();
-    navigator.vibrate(ms);
+    navigator.vibrate([100, 100, 100]);
 
     window.alert = function(al, $) {
         return function(msg) {
@@ -316,6 +318,7 @@ function buzzer(ms, need) {
 
 
     $(window).on("okbuttonclicked", function() {
+        navigator.vibrate(0);
         passedno.pause();
         reloader.src = "assets/Audio/StartPlease!.mp3";
         passedno.load();
